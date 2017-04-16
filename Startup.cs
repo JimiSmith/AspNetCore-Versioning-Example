@@ -46,6 +46,11 @@ namespace Jimismith.Versioning.Example
                 c.DocInclusionPredicate((docName, apiDesc) =>
                 {
                     var actionApiVersionModel = apiDesc.ActionDescriptor?.GetApiVersion();
+                    // would mean this action is unversioned and should be included everywhere
+                    if (actionApiVersionModel == null)
+                    {
+                        return true;
+                    }
                     if (actionApiVersionModel.DeclaredApiVersions.Any())
                     {
                         return actionApiVersionModel.DeclaredApiVersions.Any(v => $"v{v.ToString()}" == docName);
