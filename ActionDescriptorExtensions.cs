@@ -10,7 +10,7 @@ namespace Jimismith.Versioning.Example
         public static ApiVersionModel GetApiVersion(this ActionDescriptor actionDescriptor)
         {
             return actionDescriptor?.Properties
-                .Where((kvp) => (kvp.Key as Type).Equals(typeof(ApiVersionModel)))
+                .Where((kvp) => ((Type)kvp.Key).Equals(typeof(ApiVersionModel)))
                 .Select(kvp => kvp.Value as ApiVersionModel).FirstOrDefault();
         }
     }
